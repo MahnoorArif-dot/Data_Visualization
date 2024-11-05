@@ -1,0 +1,10 @@
+DateTable = CALENDAR(MIN('facility'[CreatedDate]), MAX('facility'[CreatedDate]))  #to make new table of date and drag on slicer
+  #to calculate active facility count from sample data provided
+  ActiveFacility = 
+CALCULATE(
+    COUNTROWS('facility'),
+    'facility'[Status] = "Approved",
+    'facility'[IsSuspended] = FALSE(),
+    'facility'[CreatedDate] >= MIN('DateTable'[Date]),
+    'facility'[CreatedDate] <= MAX('DateTable'[Date])
+)
